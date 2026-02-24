@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Position Playground</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 1500px; /* So we can see fixed effect when scrolling */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: relative; /* Needed for absolute positioning */
+            height: 500px;
+            margin: 40px;
+            border: 3px solid black;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        /* Box 1 - Static */
+        .box1 {
+            position: static;
+            background-color: red;
+        }
+
+        /* Box 2 - Relative */
+        .box2 {
+            position: relative;
+            top: 50px;
+            left: 60px;
+            background-color: blue;
+            z-index: 2; /* Overlaps Box 1 */
+        }
+
+        /* Box 3 - Absolute */
+        .box3 {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: green;
+            z-index: 1;
+        }
+
+        /* Box 4 - Fixed */
+        .box4 {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="text-align:center;">Position Playground</h2>
+
+    <div class="container">
+
+        <div class="box box1">
+            Box 1 <br>
+            position: static
+        </div>
+
+        <div class="box box2">
+            Box 2 <br>
+            position: relative <br>
+            (top & left used)
+        </div>
+
+        <div class="box box3">
+            Box 3 <br>
+            position: absolute <br>
+            (bottom & right used)
+        </div>
+
+    </div>
+
+    <div class="box box4">
+        Box 4 <br>
+        position: fixed <br>
+        (bottom-right corner)
+    </div>
+
+</body>
+</html>
