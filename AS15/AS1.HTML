@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; padding-top: 50px; }
+        .card { max-width: 500px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card p-4">
+        <h3 class="text-center mb-4">🔐 Password Generator</h3>
+        
+        <div class="mb-3">
+            <label class="form-label">Password Length:</label>
+            <input type="number" id="length" class="form-control" value="12" min="4" max="50">
+        </div>
+
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="includeNumbers" checked>
+            <label class="form-check-label">Include Numbers</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="includeUpper" checked>
+            <label class="form-check-label">Include Uppercase</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="includeSpecial" checked>
+            <label class="form-check-label">Include Special Characters</label>
+        </div>
+
+        <button class="btn btn-primary w-100 mt-4" onclick="generatePassword()">Generate Password</button>
+
+        <div class="mt-4">
+            <label class="form-label">Generated Password:</label>
+            <div class="input-group">
+                <input type="text" id="result" class="form-control" readonly>
+                <button class="btn btn-outline-secondary" onclick="copyPassword()">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generatePassword() {
+        const length = document.getElementById('length').value;
+        const hasNumbers = document.getElementById('includeNumbers').checked;
+        const hasUpper = document.getElementById('includeUpper').checked;
+        const hasSpecial = document.getElementById('includeSpecial').checked;
+
+        const lower = "abcdefghijklmnopqrstuvwxyz";
+        const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const numbers = "0123456789";
+        const special = "!@#$%^&*()_+[]{}|;:,.<>?";
+
+        let charPool = lower;
+        if (hasUpper) charPool += upper;
+        if (hasNumbers) charPool += numbers;
+        if (hasSpecial) charPool += special;
+
+        let password = "";
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charPool.length);
+            password += charPool[randomIndex];
+        }
+
+        document.getElementById('result').value = password;
+    }
+
+    function copyPassword() {
+        const copyText = document.getElementById("result");
+        if (!copyText.value) return;
+        copyText.select();
+        document.execCommand("copy");
+        alert("Password copied to clipboard!");
+    }
+</script>
+
+</body>
+</html>
